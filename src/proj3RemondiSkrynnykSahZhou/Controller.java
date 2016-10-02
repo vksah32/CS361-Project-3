@@ -1,4 +1,3 @@
-
 /**
  * File: Controller.java
  * Names: Alex Skrynnyk, Mike Remondi, Vivek Sah, Edward Zhou
@@ -6,8 +5,6 @@
  * Project: 3
  * Date: October 2, 2016
  */
-
-
 
 package proj3RemondiSkrynnykSahZhou;
 
@@ -24,10 +21,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
+/**
+ * Handles all user GUI interactions and coordinates with the MidiPlayer
+ * and Composition.
+ */
 public class Controller {
-    public static final int VOLUME = 127;
-    public static final int CHANNEL = 0;
-    public static final int TRACK_INDEX = 0;
 
     @FXML
     public CompositionPanel compositionPanel;
@@ -36,11 +34,17 @@ public class Controller {
     @FXML public Menu actionMenu;
 
     private Composition composition = new Composition();
-    private MidiPlayer player = new MidiPlayer(100, 60);
 
     private Line line;
     private TranslateTransition transition;
 
+    /**
+     * Handles mouse click events, extracts x,y coordinates
+     * relative to note, and creates a new note and adds it
+     * to the composition and compositionPanel.
+     *
+     * @param event a mouse click event.
+     */
     @FXML
     public void handleMouseClick(MouseEvent event)
     {
@@ -48,61 +52,75 @@ public class Controller {
         double y = event.getY();
 
         Note note = this.composition.addNote(x, y);
-        this.compositionPanel.addNote(note);
+        this.compositionPanel.addNoteRectangle(note.getRectangle());
     }
 
-    public void buildSequence(Composition composition){
-        for (Note note: composition.getComposition()){
-            this.player.addNote(note.getPitch(), VOLUME, note.getTick(), Note.NOTE_DURATION, CHANNEL, TRACK_INDEX);
-        }
-    }
-
+    /**
+     * Instantiates the line and transition fields
+     * and begins the animation based on the length
+     * of the composition.
+     */
     public void beginAnimation(){
-        line = new Line(0, 0, 0, 1280);
-        line.setStroke(Color.RED);
-        compositionPanel.getChildren().addAll(line);
-        line.setStrokeWidth(1);
-        transition = new TranslateTransition(new Duration(
-                composition.getMaxX() * 10), line);
-        transition.setToX(composition.getMaxX());
-        transition.setInterpolator(Interpolator.LINEAR);
-        transition.play();
-        transition.setOnFinished(new EventHandler<ActionEvent>() {
+        this.line = new Line(0, 0, 0, 1280);
+        this.line.setStroke(Color.RED);
+        this.compositionPanel.getChildren().add(this.line);
+        this.line.setStrokeWidth(1);
+        this.transition = new TranslateTransition(new Duration(
+                this.composition.getMaxX() * 10), this.line);
+        this.transition.setToX(this.composition.getMaxX());
+        this.transition.setInterpolator(Interpolator.LINEAR);
+        this.transition.play();
+        this.transition.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 compositionPanel.getChildren().remove(line);
             }
         });
-        this.buildSequence(this.composition);
+        this.composition.buildSequence();
     }
 
+    /**
+     * Stops the animation and removes the line from the composition panel.
+     */
     public void stopAnimation(){
-        transition.stop();
-        compositionPanel.getChildren().remove(line);
+        this.transition.stop();
+        this.compositionPanel.getChildren().remove(line);
     }
 
+    /**
+     * Plays the composition and initiates the animation.
+     * Stops the current animation and plays a new one if
+     * one already exists.
+     */
     @FXML
     public void playComposition() {
-        if (transition != null) {
-            stopComposition();
+        if (this.transition != null) {
+            this.stopComposition();
         }
-        if(composition.getComposition().size() > 0){
-            beginAnimation();
-            this.player.play();
+        if(this.composition.getComposition().size() > 0){
+            this.beginAnimation();
+            this.composition.getPlayer().play();
         }
-        
     }
 
+    /**
+     * Stops and clears the composition and destroys the animation
+     * if there is one.
+     */
     @FXML
     public void stopComposition()
     {
-        if (transition != null) {
-            stopAnimation();
+        if (this.transition != null) {
+            this.stopAnimation();
         }
-        this.player.stop();
-        this.player.clear();
+        this.composition.getPlayer().stop();
+        this.composition.getPlayer().clear();
     }
 
+    /**
+     * Ensures that all processes are killed on the
+     * destruction of the window.
+     */
     @FXML
     public void cleanUpOnExit()
     {

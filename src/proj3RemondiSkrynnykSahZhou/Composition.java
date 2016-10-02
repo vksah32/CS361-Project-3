@@ -1,18 +1,42 @@
+/**
+ * File: Composition.java
+ * Names: Alex Skrynnyk, Mike Remondi, Vivek Sah, Edward Zhou
+ * Class: CS361
+ * Project: 3
+ * Date: October 2, 2016
+ */
+
 package proj3RemondiSkrynnykSahZhou;
 
 import java.util.ArrayList;
 
 /**
- * Created by mremondi on 10/2/16.
+ * The central logic for creating and playing back a
+ * composition.
  */
 public class Composition {
+    public static final int VOLUME = 127;
+    public static final int CHANNEL = 0;
+    public static final int TRACK_INDEX = 0;
+
     private double maxX = 0;
     private ArrayList<Note> composition = new ArrayList<>();
     private CompositionPanel compositionPanel;
+    private MidiPlayer player = new MidiPlayer(100, 60);
 
+
+    /**
+     * Creates a note at the given x and y coordinates
+     * and adds the note to the composition list.
+     * Keeps track of the length of the composition.
+     *
+     * @param x mouse x location
+     * @param y mouse y location
+     * @return the created note object
+     */
     public Note addNote(double x, double y)
     {
-        maxX = (x > maxX) ? x + Note.NOTE_DURATION : maxX;
+        this.maxX = (x > maxX) ? x + Note.NOTE_DURATION : this.maxX;
 
         int tick = (int) x;
         int pitch = this.yToPitch(y);
@@ -23,19 +47,52 @@ public class Composition {
         return note;
     }
 
+    /**
+     * Converts the mouse y position to a pitch value.
+     * @param y mouse y location
+     * @return the int value of pitch
+     */
     public int yToPitch(double y) {
-        int units = (int) y % 10;
-        int answer = (int) (y - units);
+        int ones = (int) y % 10;
+        int yWithNoOnes = (int) (y - ones);
+        int pitch = 128 - yWithNoOnes/10;
 
-        int y1 = 128 - answer/10;
-
-        return y1;
+        return pitch;
     }
 
+    /**
+     * gets the composition list of notes.
+     *
+     * @return composition arraylist.
+     */
     public ArrayList<Note> getComposition(){
-        return composition;
+        return this.composition;
     }
 
-    public double getMaxX(){return maxX;}
+    /**
+     * gets the length of the composition.
+     *
+     * @return the int value of the length of the composition.
+     */
+    public double getMaxX(){return this.maxX;}
+
+    /**
+     * Add Midi Events to the Sequencer.
+     */
+    public void buildSequence(){
+        for (Note note: this.composition){
+            this.player.addNote(note.getPitch(), VOLUME, note.getTick(),
+                                Note.NOTE_DURATION, CHANNEL, TRACK_INDEX);
+        }
+    }
+
+    /**
+     * gets the player object.
+     *
+     * @return the player object
+     */
+    public MidiPlayer getPlayer(){
+        return this.player;
+    }
 
 }

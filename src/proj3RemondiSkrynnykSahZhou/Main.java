@@ -16,14 +16,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/* Main class that initializes and starts our javafx application */
 public class Main extends Application {
 
+    /**
+     * Start method that loads the FXML file, sets the controller class
+     * and initiates the stage.
+     *
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
 
         Controller controller = new Controller();
-
         loader.setController(controller);
 
         Parent root = loader.load();

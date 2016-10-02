@@ -12,18 +12,25 @@ package proj3RemondiSkrynnykSahZhou;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 /**
- * Created by alexskrynnyk on 9/22/16.
+ * Extends the Pane class and is the parent node of
+ * all of composition notes and lines.
  */
 public class CompositionPanel extends Pane {
 
-
+    /**
+     * Constructs the Panel and draws the appropriate lines.
+     */
     public CompositionPanel()
     {
         this.drawLines();
     }
 
+    /**
+     * Draws 128 lines with the specified spacing and colors.
+     */
     private void drawLines()
     {
         for(int i = 0; i < 127; i++)
@@ -35,10 +42,13 @@ public class CompositionPanel extends Pane {
             this.getChildren().add(line);
         }
     }
-    public void addNote(Note note)
-    {
-        this.getChildren().add(note.getRectangle());
+
+    /**
+     * Adds a rectangle for the note.
+     *
+     * @param note a rectangle from the Note object.
+     */
+    public void addNoteRectangle(Rectangle note) {
+        this.getChildren().add(note);
     }
-
-
 }
