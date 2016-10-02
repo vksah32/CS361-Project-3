@@ -1,0 +1,45 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import proj3Skrynnyk.CompositionPanel?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <MenuBar id="menuBar">
+            <menus>
+                <Menu id="fileMenu" text="File">
+                    <items>
+                        <MenuItem id="menuExitItem" onAction="#cleanUpOnExit">
+                            <text>
+                                Exit
+                            </text>
+                        </MenuItem>
+                    </items>
+                </Menu>
+                <Menu id="actionMenu" text="Action">
+                    <items>
+                        <MenuItem id="playMenu" onAction="#playComposition">
+                            <text>
+                                Play
+                            </text>
+                        </MenuItem>
+                        <MenuItem id="playMenu" onAction="#stopComposition">
+                            <text>
+                                Stop
+                            </text>
+                        </MenuItem>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS">
+            <CompositionPanel fx:id="compositionPanel" onMouseClicked="#handleMouseClick">
+
+            </CompositionPanel>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
