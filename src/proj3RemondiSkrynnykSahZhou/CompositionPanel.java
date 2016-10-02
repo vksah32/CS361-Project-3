@@ -1,22 +1,17 @@
-package proj3Skrynnyk;
+package proj3RemondiSkrynnykSahZhou;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-
-import java.util.ArrayList;
 
 /**
  * Created by alexskrynnyk on 9/22/16.
  */
 public class CompositionPanel extends Pane {
 
-    private ArrayList<Note> composition;
 
     public CompositionPanel()
     {
-        this.composition = new ArrayList<>();
-
         this.drawLines();
     }
 
@@ -31,27 +26,10 @@ public class CompositionPanel extends Pane {
             this.getChildren().add(line);
         }
     }
-
-    public void addNote(double x, double y)
+    public void addNote(Note note)
     {
-        int tick = (int) x;
-        int pitch = this.yToPitch(y);
-
-        Note note = new Note(pitch, tick);
-
-        this.composition.add(note);
-
         this.getChildren().add(note.getRectangle());
     }
 
-    public int yToPitch(double y)
-    {
-        int units = (int) y % 10;
-        int answer = (int) (y - units);
-
-        int y1 = 128 - answer/10;
-
-        return y1;
-    }
 
 }

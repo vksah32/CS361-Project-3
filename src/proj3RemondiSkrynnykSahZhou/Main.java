@@ -1,4 +1,4 @@
-package proj3Skrynnyk;
+package proj3RemondiSkrynnykSahZhou;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

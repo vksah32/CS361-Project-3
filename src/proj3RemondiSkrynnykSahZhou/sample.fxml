@@ -1,29 +1,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.GridPane?>
-<?import proj3Skrynnyk.CompositionPanel?>
+<?import proj3RemondiSkrynnykSahZhou.CompositionPanel?>
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml">
-
     <top>
         <MenuBar id="menuBar">
             <menus>
                 <Menu id="fileMenu" text="File">
                     <items>
-                        <MenuItem id="menuExitItem" onAction="#cleanUpOnExit">
+                        <MenuItem
+                                id="menuExitItem"
+                                onAction="#cleanUpOnExit"
+                                accelerator="Meta+Q">
                             <text>
                                 Exit
                             </text>
                         </MenuItem>
                     </items>
                 </Menu>
-                <Menu id="actionMenu" text="Action">
+                <Menu
+                        id="actionMenu"
+                        text="Action">
                     <items>
-                        <MenuItem id="playMenu" onAction="#playComposition">
+                        <MenuItem
+                                id="playMenu"
+                                onAction="#playComposition"
+                                accelerator="Meta+P">
                             <text>
                                 Play
                             </text>
                         </MenuItem>
-                        <MenuItem id="playMenu" onAction="#stopComposition">
+                        <MenuItem
+                                id="stopMenu"
+                                onAction="#stopComposition"
+                                accelerator="Meta+S">
                             <text>
                                 Stop
                             </text>
@@ -36,8 +46,8 @@
 
     <center>
         <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS">
-            <CompositionPanel fx:id="compositionPanel" onMouseClicked="#handleMouseClick">
-
+            <CompositionPanel fx:id="compositionPanel"
+                              onMouseClicked="#handleMouseClick">
             </CompositionPanel>
         </ScrollPane>
     </center>

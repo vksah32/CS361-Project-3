@@ -6,7 +6,7 @@
  * Date: September 6, 2016
  */
 
-package proj3Skrynnyk;
+package proj3RemondiSkrynnykSahZhou;
 
 import javax.sound.midi.*;
 

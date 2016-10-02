@@ -1,4 +1,4 @@
-package proj3Skrynnyk;
+package proj3RemondiSkrynnykSahZhou;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
  * Created by alexskrynnyk on 10/1/16.
  */
 public class Note {
-
+    public static final int NOTE_DURATION = 100;
     private int pitch;
     private int tick;
 
@@ -16,9 +16,6 @@ public class Note {
     public Note(int pitch, int tick) {
         this.pitch = pitch;
         this.tick = tick;
-
-        System.out.println("Pitch: " + pitch + ", tick: " + tick);
-
         this.rectangle = this.generateRectangle();
     }
 
@@ -30,10 +27,9 @@ public class Note {
         Rectangle r = new Rectangle();
         r.setX(tick);
         r.setY(1280 - pitch * 10);
-        r.setWidth(20);
+        r.setWidth(NOTE_DURATION);
         r.setHeight(10);
         r.setFill(Color.BLUE);
-
         return r;
     }
 
