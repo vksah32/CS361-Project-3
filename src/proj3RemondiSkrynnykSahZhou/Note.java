@@ -1,3 +1,13 @@
+
+/**
+ * File: Note.java
+ * Names: Alex Skrynnyk, Mike Remondi, Vivek Sah, Edward Zhou
+ * Class: CS361
+ * Project: 3
+ * Date: October 2, 2016
+ */
+
+
 package proj3RemondiSkrynnykSahZhou;
 
 import javafx.scene.paint.Color;
@@ -30,6 +40,8 @@ public class Note {
         r.setWidth(NOTE_DURATION);
         r.setHeight(10);
         r.setFill(Color.BLUE);
+        r.setStroke(Color.BLACK);
+        r.setStrokeWidth(1);
         return r;
     }
 

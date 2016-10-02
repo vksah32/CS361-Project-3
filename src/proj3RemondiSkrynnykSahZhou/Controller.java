@@ -1,3 +1,14 @@
+
+/**
+ * File: Controller.java
+ * Names: Alex Skrynnyk, Mike Remondi, Vivek Sah, Edward Zhou
+ * Class: CS361
+ * Project: 3
+ * Date: October 2, 2016
+ */
+
+
+
 package proj3RemondiSkrynnykSahZhou;
 
 import javafx.animation.Interpolator;
@@ -75,14 +86,19 @@ public class Controller {
         if (transition != null) {
             stopComposition();
         }
-        beginAnimation();
-        this.player.play();
+        if(composition.getComposition().size() > 0){
+            beginAnimation();
+            this.player.play();
+        }
+        
     }
 
     @FXML
     public void stopComposition()
     {
-        stopAnimation();
+        if (transition != null) {
+            stopAnimation();
+        }
         this.player.stop();
         this.player.clear();
     }

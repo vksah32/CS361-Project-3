@@ -1,3 +1,13 @@
+
+/**
+ * File: Main.java
+ * Names: Alex Skrynnyk, Mike Remondi, Vivek Sah, Edward Zhou
+ * Class: CS361
+ * Project: 3
+ * Date: October 2, 2016
+ */
+
+
 package proj3RemondiSkrynnykSahZhou;
 
 import javafx.application.Application;
@@ -10,7 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
 
         Controller controller = new Controller();
 

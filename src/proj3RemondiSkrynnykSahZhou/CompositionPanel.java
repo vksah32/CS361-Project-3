@@ -1,3 +1,12 @@
+
+/**
+ * File: CompositionPanel.java
+ * Names: Alex Skrynnyk, Mike Remondi, Vivek Sah, Edward Zhou
+ * Class: CS361
+ * Project: 3
+ * Date: October 2, 2016
+ */
+
 package proj3RemondiSkrynnykSahZhou;
 
 import javafx.scene.layout.Pane;
